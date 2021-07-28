@@ -13,11 +13,21 @@ class Project extends Model
 
     public function path () : string
     {
-        return "/projects/$this->id";
+        return route('projects.show', $this->id);
     }
 
     public function owner ()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function tasks ()
+    {
+        return $this->hasMany(Task::class);
+    }
+
+    public function addTask (string $body)
+    {
+        return $this->tasks()->create(compact('body'));
     }
 }

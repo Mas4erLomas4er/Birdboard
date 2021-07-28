@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProjectsController;
+use App\Http\Controllers\TasksController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,10 @@ Route::get('/', function () { return view('welcome'); });
 
 Route::group(['middleware' => 'auth'], function ()
 {
+    Route::resource('projects.tasks', TasksController::class)->only([
+        'index', 'store', 'update',
+    ]);
+
     Route::resource('projects', ProjectsController::class)->only([
         'index', 'create', 'show', 'store',
     ]);

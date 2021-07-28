@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use function PHPUnit\Framework\assertCount;
 
 class ProjectTest extends TestCase
 {
@@ -26,5 +27,16 @@ class ProjectTest extends TestCase
         $project = Project::factory()->create();
 
         $this->assertInstanceOf(User::class, $project->owner);
+    }
+
+    /** @test */
+    public function it_can_add_a_task ()
+    {
+        $project = Project::factory()->create();
+
+        $task = $project->addTask('Test task 123');
+
+        $this->assertCount(1, $project->tasks);
+        $this->assertTrue($project->tasks->contains($task));
     }
 }
