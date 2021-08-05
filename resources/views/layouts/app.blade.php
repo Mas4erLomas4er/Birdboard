@@ -15,8 +15,8 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
-    <div id="app" class="bg-gray-100 min-h-screen">
+<body class="theme-light" style="background-color: #818181;">
+    <div id="app" class="bg-page min-h-screen pb-12 text-default">
         @include("includes.nav-header")
 
         <main class="mx-auto container">

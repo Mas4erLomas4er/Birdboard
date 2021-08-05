@@ -1,0 +1,7 @@
+.input {
+    @apply block bg-input border border-muted-light rounded-md p-2 text-sm outline-none;
+
+    &.is-invalid {
+        @apply border-red-500;
+    }
+}

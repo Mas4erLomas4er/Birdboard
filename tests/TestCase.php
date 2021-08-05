@@ -12,5 +12,16 @@ abstract class TestCase extends BaseTestCase
     protected function signIn (User $user = null)
     {
         $this->actingAs($user ?: User::factory()->create());
+
+        return auth()->user();
+    }
+
+    protected function assertRoutesRedirect (array $routes, string $redirect_route)
+    {
+        foreach ($routes as $route)
+        {
+            $this->get($route)
+                ->assertRedirect($redirect_route);
+        }
     }
 }

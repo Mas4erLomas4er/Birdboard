@@ -1,0 +1,7 @@
+.button {
+    @apply bg-button text-white rounded-lg shadow text-sm py-2 px-5;
+
+    &.is-outlined {
+        @apply bg-transparent border border-accent text-default shadow-none;
+    }
+}

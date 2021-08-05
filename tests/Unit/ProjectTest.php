@@ -4,6 +4,7 @@ namespace Tests\Unit;
 
 use App\Models\Project;
 use App\Models\User;
+use Facades\Tests\Setup\ProjectFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -18,7 +19,7 @@ class ProjectTest extends TestCase
     {
         $project = Project::factory()->create();
 
-        $this->assertEquals('/projects/' . $project->id, $project->path());
+        $this->assertEquals(route('projects.show', $project->id), $project->path());
     }
 
     /** @test */
@@ -38,5 +39,15 @@ class ProjectTest extends TestCase
 
         $this->assertCount(1, $project->tasks);
         $this->assertTrue($project->tasks->contains($task));
+    }
+
+    /** @test */
+    public function in_can_invite_a_user ()
+    {
+        $project = ProjectFactory::create();
+
+        $project->invite($user = User::factory()->create());
+
+        $this->assertTrue($project->members->contains($user));
     }
 }

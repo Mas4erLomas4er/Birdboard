@@ -13,13 +13,19 @@ class CreateTasksTable extends Migration
      */
     public function up ()
     {
-        Schema::create('tasks', function (Blueprint $table)
-        {
+        Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('project_id');
+            $table->unsignedBigInteger('project_id');
             $table->text('body');
             $table->boolean('completed')->default(false);
             $table->timestamps();
+        });
+
+        Schema::table('tasks', function (Blueprint $table) {
+            $table->foreign('project_id')
+                ->references('id')
+                ->on('projects')
+                ->onDelete('cascade');
         });
     }
 
