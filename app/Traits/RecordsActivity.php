@@ -4,8 +4,6 @@
 namespace App\Traits;
 
 
-use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
@@ -39,7 +37,7 @@ trait RecordsActivity
             'description' => $type,
             'changes' => $this->getActivityChanges(),
             'project_id' => class_basename($this) === 'Project' ? $this->id : $this->project_id,
-            'user_id' => auth()->id(),
+            'user_id' => auth()->id() ?: ($this->project ?? $this)->owner->id,
         ]);
     }
 

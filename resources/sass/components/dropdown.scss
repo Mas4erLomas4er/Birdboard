@@ -1,0 +1,11 @@
+.dropdown {
+    @apply relative
+}
+
+.dropdown-menu {
+    @apply absolute bg-card mt-2 py-2 rounded-md shadow-md;
+}
+
+.dropdown-menu-link {
+    @apply block text-sm px-4 py-2;
+}
